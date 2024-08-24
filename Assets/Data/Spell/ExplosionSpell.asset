@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdcc0cfc1b60244bbc6413ce2f6cbb3, type: 3}
+  m_Name: ExplosionSpell
+  m_EditorClassIdentifier: 
+  spellName: Explosion
+  description: Basic explosion
+  icon: {fileID: 0}
+  castType: 0
+  castDelay: 1
+  duration: 0
+  chargeTime: 0
+  weight: 1
+  spellCost: 1
+  damage:
+    amount: 5
+    type: 0
+    statusEffect:
+      type: 0
+      duration: 0
+      interval: 1
+      modifierValue: 5
+  casterFriendly: 0
+  explosionPrefab: {fileID: 9092299428434498024, guid: 098e83e9581b3c54ca5085fdd51a0314, type: 3}
+  radiusScale: 1
