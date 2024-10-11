@@ -32,17 +32,15 @@ public class ProjectileOrbit : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    public void SetProjectiles(Transform casterTransform, Damage damage, bool piercing)
+    public void SetProjectiles(Transform casterTransform, Damage damage)
     {
-        Collider2D casterCollider = casterTransform.GetComponent<Collider2D>();
-
         for (int i = 0; i < amount; i++)
         {
-            orbitProjectiles[i].SetStaticProjectile(damage, piercing);
+            orbitProjectiles[i].SetStaticProjectile(damage);
 
-            if (orbitProjectiles[i].TryGetComponent(out Collider2D collider) && casterCollider != null)
+            if (orbitProjectiles[i].TryGetComponent(out Collider2D collider))
             {
-                Physics2D.IgnoreCollision(collider, casterCollider);
+                collider.excludeLayers = LayerMask.GetMask(LayerMask.LayerToName(casterTransform.gameObject.layer));
             }
         }
     }

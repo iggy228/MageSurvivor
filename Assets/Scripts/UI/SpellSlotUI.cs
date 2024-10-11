@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SpellSlotUI : MonoBehaviour
+public class SpellSlotUI : MonoBehaviour, IDropHandler
 {
-    public Image icon;
+    public GameObject draggableItemPrefab;
+
     public Image border;
+
+    public Sprite activeBorder;
+    public Sprite inactiveBorder;
+
+    private DraggableItem draggableItem;
 
     private bool active;
     public bool Active
@@ -15,26 +22,51 @@ public class SpellSlotUI : MonoBehaviour
             active = value;
             if (active)
             {
-                border.enabled = true;
+                border.sprite = activeBorder;
             }
             else
             {
-                border.enabled = false;
+                border.sprite = inactiveBorder;
             }
         }
     }
 
-    public void SetWeaponIconSprite(Sprite sprite)
+    public void SetIcon(Sprite sprite)
     {
-        icon.sprite = sprite;
-
         if (sprite == null)
         {
-            icon.enabled = false;
+            if (draggableItem != null)
+            {
+                Destroy(draggableItem.gameObject);
+            }
+            return;
         }
-        else
+        if (draggableItem == null)
         {
-            icon.enabled = true;
+            draggableItem = Instantiate(draggableItemPrefab, transform).GetComponent<DraggableItem>();
+            draggableItem.SetIcon(sprite);
         }
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameObject dropped = eventData.pointerDrag;
+        DraggableItem droppedDraggableItem = dropped.GetComponent<DraggableItem>();
+
+        if (draggableItem != null)
+        {
+            draggableItem.transform.SetParent(droppedDraggableItem.parentAfterDrag);
+            draggableItem.transform.position = droppedDraggableItem.positionAfterDrag;
+        }
+
+        droppedDraggableItem.positionAfterDrag = transform.position;
+        droppedDraggableItem.parentAfterDrag = transform;
+
+        // final step swap references for correct working
+        SpellSlotUI swapSlot = droppedDraggableItem.spellSlotUI;
+        DraggableItem swapItem = droppedDraggableItem;
+        swapSlot.draggableItem = draggableItem;
+        draggableItem = swapItem;
+
     }
 }

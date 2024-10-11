@@ -29,6 +29,6 @@ MonoBehaviour:
       duration: 0
       interval: 1
       modifierValue: 5
+  radiusScale: 1
   casterFriendly: 0
   explosionPrefab: {fileID: 9092299428434498024, guid: 098e83e9581b3c54ca5085fdd51a0314, type: 3}
-  radiusScale: 1

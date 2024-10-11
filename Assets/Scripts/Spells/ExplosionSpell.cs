@@ -5,12 +5,11 @@ public class ExplosionSpell : Spell
 {
     [Header("Explosion properties")]
     public Damage damage;
+    [Min(0f)]
+    public float radiusScale = 1f;
 
     public bool casterFriendly = false;
     public GameObject explosionPrefab;
-
-    [Min(0f)]
-    public float radiusScale = 1f;
 
     public override void Cast(Transform casterTransform)
     {

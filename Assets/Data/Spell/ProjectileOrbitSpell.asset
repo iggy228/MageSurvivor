@@ -34,5 +34,4 @@ MonoBehaviour:
       interval: 1
       modifierValue: 5
   projectileAmount: 4
-  piercing: 1
   projectilePrefab: {fileID: 6007839564362783123, guid: 3c81e8545ad067245a115d6dd85c9d12, type: 3}

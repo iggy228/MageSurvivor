@@ -16,21 +16,22 @@ MonoBehaviour:
   description: Spawn damaging bubbles
   icon: {fileID: 21300000, guid: bffca0705f56e1e4ca159fb275cfe492, type: 3}
   castType: 0
-  castDelay: 0.5
-  duration: 0
+  castDelay: 0.3
+  duration: 1
   chargeTime: 0
   weight: 1
   spellCost: 1
-  damage:
-    amount: 1
-    type: 0
-    statusEffect:
+  projectileStats:
+    damage:
+      amount: 1
       type: 0
-      duration: 0
-      interval: 1
-      modifierValue: 5
-  lifetime: 3
-  piercing: 0
-  speed: 6
-  accelarationRate: 0.05
+      statusEffect:
+        type: 0
+        duration: 0
+        interval: 1
+        modifierValue: 5
+    lifetime: 3
+    piercing: 0
+    speed: 5
+    accelarationRate: 0.5
   projectilePrefab: {fileID: 1486153107230404058, guid: fe4c8975631649e47b8b3b1cb0582b87, type: 3}

@@ -15,8 +15,6 @@ public class SpellSlot
     private float chargeTime = 0f;
     private float duration = 0f;
 
-    private int upgradeLevel = 0;
-
     private SpellState state = SpellState.READY;
     public SpellState State { get => state; }
 
@@ -28,7 +26,6 @@ public class SpellSlot
         castDelay = 0f;
         chargeTime = 0f;
         duration = 0f;
-        upgradeLevel = 0;
         state = SpellState.READY;
     }
 
@@ -38,7 +35,6 @@ public class SpellSlot
         castDelay = 0f;
         chargeTime = 0f;
         duration = 0f;
-        upgradeLevel = 0;
         state = SpellState.READY;
     }
 
@@ -88,6 +84,11 @@ public class SpellSlot
     // return gameobject to cast
     public void TryCastSpell(Caster caster)
     {
+        if (spell == null)
+        {
+            return;
+        }
+
         if (state == SpellState.READY)
         {
             switch (spell.castType)
@@ -122,10 +123,5 @@ public class SpellSlot
             duration = 0f;
             castDelay = spell.castDelay;
         }
-    }
-
-    public void AddSpellLevel()
-    {
-        upgradeLevel++;
     }
 }

@@ -1,11 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// TODO Refactor for supporting dynamic length
 public class SpellInventory : MonoBehaviour
 {
-    private SpellSlot[] spells = new SpellSlot[4];
-    public SpellSlot[] Spells { get => spells; }
-    public int SpellSlotsCount { get => spells.Length; }
+    private SpellSlot[] spellSlots = new SpellSlot[4];
+    public SpellSlot[] SpellsSlots { get => spellSlots; }
+
+    /// <summary>
+    /// Return all spells in inventory
+    /// </summary>
+    public Spell[] Spells
+    {
+        get
+        {
+            List<Spell> spells = new();
+
+            foreach (SpellSlot spellSlot in spellSlots)
+            {
+                if (spellSlot.spell != null)
+                {
+                    spells.Add(spellSlot.spell);
+                }
+            }
+
+            return spells.ToArray();
+        }
+    }
+
+    public int SpellSlotsCount { get => spellSlots.Length; }
 
     private int? selectedSpellSlotIndex = null;
     public SpellSlot SelectedSpell
@@ -16,7 +40,7 @@ public class SpellInventory : MonoBehaviour
             {
                 return null;
             }
-            return spells[(int)selectedSpellSlotIndex];
+            return spellSlots[(int)selectedSpellSlotIndex];
         }
     }
 
@@ -31,9 +55,9 @@ public class SpellInventory : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < spellSlots.Length; i++)
         {
-            spells[i] = new SpellSlot();
+            spellSlots[i] = new SpellSlot();
         }
     }
 
@@ -43,8 +67,8 @@ public class SpellInventory : MonoBehaviour
         {
             if (startingSpell[i] != null)
             {
-                spells[i] = startingSpell[i];
-                OnSpellSlotsUpdated.Invoke(spells);
+                spellSlots[i] = startingSpell[i];
+                OnSpellSlotsUpdated.Invoke(spellSlots);
             }
         }
     }
@@ -74,9 +98,9 @@ public class SpellInventory : MonoBehaviour
     void FixedUpdate()
     {
         // tick all spells
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < spellSlots.Length; i++)
         {
-            spells[i]?.Execute(Time.fixedDeltaTime);
+            spellSlots[i]?.Execute(Time.fixedDeltaTime);
         }
     }
 
@@ -88,13 +112,25 @@ public class SpellInventory : MonoBehaviour
 
     public int FindEmptySlot()
     {
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < spellSlots.Length; i++)
         {
-            if (spells[i].IsEmpty)
+            if (spellSlots[i].IsEmpty)
             {
                 return i;
             }
         }
         return -1;
+    }
+
+    public bool AddSpell(Spell spell)
+    {
+        int slotIndex = FindEmptySlot();
+        if (slotIndex != -1)
+        {
+            spellSlots[slotIndex].spell = spell;
+            OnSpellSlotsUpdated?.Invoke(spellSlots);
+            return true;
+        }
+        return false;
     }
 }

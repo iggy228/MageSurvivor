@@ -13,11 +13,11 @@ public class ProjectileWithCollisionTriggerSpell : ProjectileSpell
     {
         GameObject projectile = Instantiate(projectilePrefab, casterTransform.position, casterTransform.rotation);
 
-        projectile.GetComponent<Projectile>().SetProjectile(damage, speed, accelarationRate, lifetime, piercing);
+        projectile.GetComponent<Projectile>().SetProjectile(projectileStats);
 
-        if (casterTransform.TryGetComponent(out Collider2D collider) && projectile.TryGetComponent(out Collider2D collider2))
+        if (projectile.TryGetComponent(out Collider2D collider))
         {
-            Physics2D.IgnoreCollision(collider2, collider);
+            collider.excludeLayers = LayerMask.GetMask(LayerMask.LayerToName(casterTransform.gameObject.layer));
         }
 
         if (projectile.TryGetComponent(out CollisionTriggerSpell component))

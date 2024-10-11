@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3212943858996318560}
   - component: {fileID: 8959494166597961303}
   - component: {fileID: -5872608492513803181}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile_Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,3 +172,4 @@ MonoBehaviour:
   speed: 0
   accelarationRate: 0
   lifetime: 0
+  piercing: 0

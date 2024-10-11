@@ -15,7 +15,6 @@ public class ProjectileOrbitSpell : Spell
     [Header("Orbit spell projectile properties")]
     public Damage damage;
     public int projectileAmount;
-    public bool piercing;
     public GameObject projectilePrefab;
 
     public override void Cast(Transform casterTransform)
@@ -23,6 +22,6 @@ public class ProjectileOrbitSpell : Spell
         ProjectileOrbit newOrbit = Instantiate(orbit, casterTransform.position, casterTransform.rotation, casterTransform.transform).GetComponent<ProjectileOrbit>();
 
         newOrbit.SetProjectileOrbit(speed, lifetime, projectileAmount, projectilePrefab, radius);
-        newOrbit.SetProjectiles(casterTransform, damage, piercing);
+        newOrbit.SetProjectiles(casterTransform, damage);
     }
 }

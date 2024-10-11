@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c55a8c5675a66b44bf554291cd4e5df, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  spellName: Shotgun
+  description: Spawn tri projectiles
+  icon: {fileID: 1479396722, guid: 17154ea2f69700e45858d6b68e4126c3, type: 3}
+  castType: 0
+  castDelay: 1
+  duration: 0
+  chargeTime: 0
+  weight: 1
+  spellCost: 1
+  projectileStats:
+    damage:
+      amount: 2
+      type: 0
+      statusEffect:
+        type: 0
+        duration: 0
+        interval: 1
+        modifierValue: 5
+    lifetime: 3
+    piercing: 0
+    speed: 5
+    accelarationRate: 1
+  projectilePrefab: {fileID: 4372489053820966814, guid: e9480a516decacd479fae69bc5baee32, type: 3}
+  amount: 3
+  spread: 15

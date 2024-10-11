@@ -14,24 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Fireshot
   description: Accelarating projectile that explode upon contact
-  icon: {fileID: 0}
+  icon: {fileID: 1904288470, guid: a5a3f7d3ea311334ea88ceafc38b8154, type: 3}
   castType: 0
-  castDelay: 1.5
+  castDelay: 1
   duration: 0
   chargeTime: 0
   weight: 0
   spellCost: 0
-  damage:
-    amount: 5
-    type: 0
-    statusEffect:
+  projectileStats:
+    damage:
+      amount: 3
       type: 0
-      duration: 0
-      interval: 1
-      modifierValue: 5
-  lifetime: 3
-  piercing: 0
-  speed: 1
-  accelarationRate: 1.5
+      statusEffect:
+        type: 0
+        duration: 0
+        interval: 1
+        modifierValue: 5
+    lifetime: 3
+    piercing: 0
+    speed: 0.5
+    accelarationRate: 4
   projectilePrefab: {fileID: 6390875586016693445, guid: 98b806770693dd54c8d7928ab35f088f, type: 3}
   triggerSpell: {fileID: 11400000, guid: 59636fa5da8a8c34487f1646ae0ce84f, type: 2}

@@ -9,7 +9,7 @@ public class FollowPlayerAi : MonoBehaviour
     private Enemy enemy;
 
     [Min(0), SerializeField]
-    private float detectionStutterTime = 0f;
+    private float detectionStutterTime = 0.1f;
     private float currentDetectionStutterTime;
 
 
@@ -17,6 +17,11 @@ public class FollowPlayerAi : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         enemy = GetComponent<Enemy>();
+    }
+
+    private void Start()
+    {
+        currentDetectionStutterTime = detectionStutterTime;
     }
 
     private void FixedUpdate()

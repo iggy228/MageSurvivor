@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4624928584612241364}
   - component: {fileID: 7372091759042044711}
   - component: {fileID: 1063098134086477780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orbit_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

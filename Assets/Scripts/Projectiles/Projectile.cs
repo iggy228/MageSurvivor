@@ -4,25 +4,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private Damage damage;
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float accelarationRate;
-    [SerializeField]
-    private float lifetime;
-
-    private bool piercing;
+    private ProjectileSpellStats stats;
 
     private Rigidbody2D rb;
+    private float speed;
 
-    public void SetProjectile(Damage damage, float speed, float accelarationRate, float lifetime, bool piercing)
+    public void SetProjectile(ProjectileSpellStats stats)
     {
-        this.damage = damage;
-        this.speed = speed;
-        this.accelarationRate = accelarationRate;
-        this.lifetime = lifetime;
-        this.piercing = piercing;
+        this.stats = stats;
+        speed = stats.speed;
     }
 
     private void Start()
@@ -30,28 +20,30 @@ public class Projectile : MonoBehaviour
         // useless comment that for some reason i need so this script work (dont ask me why i dont know it either)
         rb = GetComponent<Rigidbody2D>();
 
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, stats.lifetime);
     }
 
     private void FixedUpdate()
     {
         rb.velocity = transform.right * speed;
-        if (accelarationRate != 1f)
+        if (stats.accelarationRate != 1f)
         {
             // multiple speed with accelaration per fixed update
-            speed *= (accelarationRate - 1) * Time.fixedDeltaTime + 1;
+            speed *= (stats.accelarationRate - 1) * Time.fixedDeltaTime + 1;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision);
         if (collision.TryGetComponent<Damagable>(out var healthSystem))
         {
-            healthSystem.TakeDamage(damage);
-            if (!piercing)
+            healthSystem.TakeDamage(stats.damage);
+            if (!stats.piercing)
             {
                 Destroy(gameObject);
             }
+            return;
         }
     }
 }
